@@ -104,7 +104,7 @@ $ git clone <URL>
 $ git pull origin master
 ```
 
-git 02
+# git 02
 그러나 반가시당 충돌
 2개 이상의 컴퓨터에서 같은 원격 저장소 사용시
 
