@@ -105,82 +105,101 @@ $ git pull origin master
 ```
 
 # git 02
-그러나 반가시당 충돌
+
+## 혼자 작업시 conflict 해결하기
+
 2개 이상의 컴퓨터에서 같은 원격 저장소 사용시
 
-$ git add .
+1. `$ git add .`
 
-$ git commit -m '메세지'
+2. `$ git commit -m '메세지'`
 
-$ git push origin master
+3. `$ git push origin master`
 
-잘 된다 => 8번으로
+   1. 잘 된다 => 8번으로
 
-안된다 => 4번으로
+   2. 안된다 => 4번으로
 
-hint: Updates were "rejected" because the tip of your 
-current branch is behind
-hint: its remote counterpart. Integrate the remote changes (e.g.
-hint: '"git pull" ...') before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-$ git pull origin master
+      ```
+      hint: Updates were "rejected" because the tip of your 
+      current branch is behind
+      hint: its remote counterpart. Integrate the remote changes (e.g.
+      hint: '"git pull" ...') before pushing again.
+      hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+      ```
 
-자동 병합 (자동 병합)이 일대. =>8번으로
+4. `$ git pull origin master`
 
-$ git status 에 아무런 알림이 없다.
-자동 병합에 실패 => 5번으로
+   1. 자동 병합(auto merge)이 일어난다.  =>8번으로
 
-...
-Automatic merge failed; fix conflicts and then commit the result.
+      - `$ git status` 에 아무런 알림이 없다.
 
-vscode 에서 직접 빨간불 들어온 파일을 수정한다.
+   2. 자동 병합에 실패 => 5번으로
 
-$ git add .
+      ```
+      ...
+      Automatic merge failed; fix conflicts and then commit the result.
+      
+      ```
 
-$ git commit -m '충돌 해결'
+5. `vscode` 에서 직접 빨간불 들어온 파일을 수정한다.
 
-$ git push origin master
+6. `$ git add .`
 
-지점 오이스 오이스
-$ git branch <branch-name> 으로 새로운 브랜치 생성
+7. `$ git commit -m '충돌 해결'`
 
-$ git switch <branch-name> 으로 브랜치 변경
+8. `$ git push origin master`
 
-$ git switch -c <branch-name> 으로 한번에 새로운 브랜치 생성 및 변경 가능
-작업 및 add & commit
+   
 
-$ git switch master 로 브랜치 변경
+## branch 혼자 사용하기
 
-$ git merge <branch-name> 으로 병합
+1. `$ git branch <branch-name>` 으로 새로운 브랜치 생성
 
-Fast Forward => 9번으로
+2. `$ git switch <branch-name>` 으로 브랜치 변경
 
-Auto Merge => 9번으로
+   1. `$ git switch -c <branch-name>` 으로 한번에 새로운 브랜치 생성 및 변경 가능
 
-Conflict => 6번으로
+3. 작업 및 `add` & `commit`
 
-...
-Automatic merge failed; fix conflicts and then commit the result.
-vscode 에서 직접 빨간불 들어온 파일을 수정한다.
+4. `$ git switch master` 로 브랜치 변경
 
-$ git add .
+5. `$ git merge <branch-name>` 으로 병합
 
-$ git commit -m '충돌 해결'
+   1. Fast Forward => 9번으로
 
-종료
+   2. Auto Merge => 9번으로
 
-$ git branch -d <branch-name> 으로 수명이 다한 브랜치 삭제
+   3. Conflict => 6번으로
 
-지점 오이스 오이스
-리모트 리모트 리모트 포포
-콜라브라토르
-팀원들 각자 clone
-$ git switch -c <my-branch> 로 각자 리포에서 브랜치 생성
-작업 => => => 반복...addcommit
-$ git push origin <my-branch>
-리모에이드홍보(풀요청) []
-아침리리 리 드 드 리 수리 비에이드, 결합 한 수
-자동 병합(초초)=>
-충돌 (적) = > github 거머리수당 부수 합병 후진
-로컬 브랜치에서 master$ git pull origin master
-작업 반복
+      ```
+      ...
+      Automatic merge failed; fix conflicts and then commit the result.
+      ```
+
+6. `vscode` 에서 직접 빨간불 들어온 파일을 수정한다.
+
+7. `$ git add .`
+
+8. `$ git commit -m '충돌 해결'`
+
+9. 종료
+
+10. `$ git branch -d <branch-name>` 으로 수명이 다한 브랜치 삭제
+
+
+
+## branch 혼자 사용하기
+
+1. remote 에서 리포 생성
+2. collabrator 추가
+3. 팀원들 각자 `clone`
+4. `$ git switch -c <my-branch>` 로 각자 리포에서 브랜치 생성
+5. 작업 => `add` => `commit` => 반복...
+6. `$ git push origin <my-branch>`
+7. 리모트에서 PR(pull request) 생성
+8. 팀원들끼리 코드 리뷰 및 최종 merge 결정
+   1. Auto merge 가능(초록색) => 진행
+   2. Conflict 발생(빨간색) => github에서 수동으로 수정 후 merge 진행
+9. 로컬 `master` 브랜치에서 `$ git pull origin master`
+10. 작업 반복
