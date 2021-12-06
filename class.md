@@ -29,3 +29,7 @@ print( f'{a:x}' )
 
 a = int( input() )
 print( hex(a)[2:].upper() )
+
+a = 'a'
+next = ord(a) + 1
+print( chr(next) )
