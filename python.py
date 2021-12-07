@@ -27,6 +27,26 @@ if (bool(int(a)) and bool(int(b))) or (not bool(int(a)) and not bool(int(b))):
 else:
   print('False')
 
+#6022
+s=input()
+print(s[0:2],s[2:4],s[4:6])
+
+#6023
+a,b,c=input().split()
+print(b)
+
+#6024
+w1,w2=input().split()
+
+#6025
+a,b=input().split()
+
+#6027
+a=input()
+n=int(a)
+print('%x'%n)
+
+
 
 #6069
 a=input()
@@ -147,9 +167,12 @@ a=round(m,1)
 x='MB'
 print(a,x)
 
+#6085 
+
 n = int(input())
 while True:
-  if n>=0:print(n)
+  if n>=0:
+    print(n)
   else:break
   n=-1
 
@@ -169,3 +192,26 @@ for ch in range(97,n+1):
 n=int(input())
 for i in range(n+1):
   print(i,end=' ')
+
+n=int(input())
+total=0
+for i range(1,n+1):
+  total+=i
+print(total)
+
+n=int(input(),base=16)
+for i in range(1,16):
+  print(f'{n}*{i}={n*i}')
+
+while True:
+  ch =input()
+  if ch !='q':
+    print(ch)
+  else:
+    break
+
+#구구단
+n=int(input())
+for x in range(2,10):
+  for y in range(1,10):
+    print(f'{x}*{y}={x*y}')
