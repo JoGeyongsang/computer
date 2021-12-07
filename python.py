@@ -176,6 +176,52 @@ while True:
   else:break
   n=-1
 
+#6092
+n =int(input())
+a=list(map(int,input().split()))
+result=[0]*24
+for i in range(n):
+  result[a[i]]+=1
+for i in range(1,len(result)):
+  print(result[i],end=' ')
+
+#6093
+n=int(input())
+a=list(map(int,input().split()))
+result = [0]* 24
+for i in range(n):
+  a[i]=int(a[i])
+for i in range(n-1,-1,-1):
+  print(a[i],end=' ')
+
+#6094
+for i in range(n):
+  a[i] = int(a[i])
+  if(a[i]<min):
+    min = a[i]
+print(min)
+
+n=int(input())
+a=list(map(int,input().split()))
+mini=a[0]
+for i in a[1:]:
+  if mini>i:
+    mini=i
+print(mini)
+
+n=int(input())
+a=list(map(int,input().split()))
+mini=a[0]
+maxi=a[0]
+for i in a[1:]:
+  if mini>i:
+    mini=i
+  if i>maxi:
+    maxi=i
+print(mini)
+print(maxi)
+
+
 n=int(input())
 for i in range(n,0,-1):
   print(i)
@@ -251,8 +297,48 @@ for x in range(1,n+1):
     print('*',end='')
   print()
 
-
 n=int(input())
 for x in range(1,n+1):
   print(' '*(n-x),end='')
   print('*'*x)
+
+n=int(input())
+for x in range(n):
+  for y in range(n-x):
+    print(' ',end='')
+  for z in range(x+1):
+    print('*',end='')
+  print()
+
+n=int(input())
+for x in range(n,0,-1):
+  for y in range(x):
+    print('*',end='')
+  print()
+
+n=int(input())
+for x in range(n,0,-1):
+  for y in range(n-x):
+    print(' ',end='')
+  for z in range(x):
+    print('*',end='')
+  print()
+
+n=int(input())
+for x in range(n,0,-1):
+  for y in range(n-x):
+    print(' ',end='')
+  for z in range(x):
+    print('*',end='')
+  print()
+
+n=int(input())
+for x in range(1,n+1):
+  for y in range(n-x):
+    print(' ',end='')
+  for z in range(2*x-1):
+    print('*',end='')
+  print()
+
+
+
