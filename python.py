@@ -220,3 +220,39 @@ n=int(input())
 for x in range(2,10):
   for y in range(1,10):
     print('{}*{}={}'.format(x,y,x*y))
+
+
+for n in range(2,10):
+  print(n, end=' ')
+  print()
+
+  for i in range(1,10):
+    print(i,end=' ')
+    print()
+
+for n in range(2,10):
+  print(n, end=' ')
+  print()
+
+  for i in range(1,10):
+    print(i,end=' ')
+  print()
+
+#직사각형
+for i in range(n):
+  for j in range(n):
+    print('*,end='')
+  print()
+
+#별찍기
+n=int(input())
+for x in range(1,n+1):
+  for y in range(1,x+1):
+    print('*',end='')
+  print()
+
+
+n=int(input())
+for x in range(1,n+1):
+  print(' '*(n-x),end='')
+  print('*'*x)
