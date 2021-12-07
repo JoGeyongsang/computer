@@ -156,3 +156,16 @@ while True:
 n=int(input())
 for i in range(n,0,-1):
   print(i)
+
+n =int(input())
+while n:
+  print(n)
+  n-=1
+
+n=int(input())
+for ch in range(97,n+1):
+  print(chr(ch),end=' ')
+
+n=int(input())
+for i in range(n+1):
+  print(i,end=' ')
