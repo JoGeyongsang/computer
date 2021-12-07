@@ -146,3 +146,13 @@ m=(h*b*c*s)/(8*1024*1024)
 a=round(m,1)
 x='MB'
 print(a,x)
+
+n = int(input())
+while True:
+  if n>=0:print(n)
+  else:break
+  n=-1
+
+n=int(input())
+for i in range(n,0,-1):
+  print(i)
