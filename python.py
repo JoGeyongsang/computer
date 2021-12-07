@@ -195,20 +195,6 @@ for i in range(n-1,-1,-1):
   print(a[i],end=' ')
 
 #6094
-for i in range(n):
-  a[i] = int(a[i])
-  if(a[i]<min):
-    min = a[i]
-print(min)
-
-n=int(input())
-a=list(map(int,input().split()))
-mini=a[0]
-for i in a[1:]:
-  if mini>i:
-    mini=i
-print(mini)
-
 n=int(input())
 a=list(map(int,input().split()))
 mini=a[0]
@@ -220,6 +206,15 @@ for i in a[1:]:
     maxi=i
 print(mini)
 print(maxi)
+
+n=int(input())
+a=list(map(int,input().split()))
+maxi=a[0]
+for i in a[1:]:
+  if i>maxi:
+    maxi=i
+print(maxi)
+print(a.index(maxi)+1)
 
 
 n=int(input())
