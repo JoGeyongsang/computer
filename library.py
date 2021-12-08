@@ -24,3 +24,7 @@ arrn
 display(arrn[1:4,3:7])
 
 display(arrn[1:4,1])
+
+arr=np.arange(1,46)
+arr
+np.random.choice(arr,size=6,replace=False)
