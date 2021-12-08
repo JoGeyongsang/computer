@@ -336,4 +336,18 @@ for x in range(1,n+1):
   print()
 
 
+a=int(input())
+b=int(input())
+c=int(input())
+solve=list(map(int,str(a*b*c)))
+ans=[0]*10
+for i in solve:
+  ans[i]+=1
+print(*ans, sep='\n')
 
+ans=[0]*42
+for i in range(10):
+  n=int(input())
+  i=n%42
+  ans[i]=1
+print(sum(ans))
