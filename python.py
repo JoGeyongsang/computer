@@ -207,15 +207,6 @@ for i in a[1:]:
 print(mini)
 print(maxi)
 
-n=int(input())
-a=list(map(int,input().split()))
-maxi=a[0]
-for i in a[1:]:
-  if i>maxi:
-    maxi=i
-print(maxi)
-print(a.index(maxi)+1)
-
 #6095
 a=[[0]*5 for _ in range(5)]
 n=int(input())
@@ -237,7 +228,7 @@ for i in range(19):
     print(shape[i][j],end=' ')
   print()
 
-#6096
+#6096 이건 정말 모르겠다
 a=[list(map(int,input().split()))for _ in range(19)]
 n=int(input())
 for i in range(n):
@@ -278,7 +269,6 @@ a = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,],
 ]
-
 x,y 10,10
 for j in range(19):
   if j !=y-1:
@@ -460,3 +450,44 @@ for i in range(1,10):
     maxidx = i
 print(maxi)
 print(maxidx)
+
+#별찍기 list
+n=int(input())
+a=[['']*n for _ in range(n)]
+for i in range(n):
+  for j in range(i+1):
+    a[i][j]='*'
+for i in range(n):
+  for j in range(n):
+    print(a[i][j],end='')
+  print()
+  
+n = int(input())
+a = [ [' '] * n for _ in range(n) ]
+for i in range(n): 
+  for j in range(n-1, n-2-i, -1):
+    a[i][j] = '*'
+for i in range(n):
+  for j in range(n):
+    print(a[i][j], end='')
+  print()
+
+n=int(input())
+a=[['']*n for _ in range(n,0,-1)]
+for i in range(n):
+  for j in range(n-i):
+    a[i][j]='*'
+for i in range(n):
+  for j in range(n):
+    print(a[i][j],end='')
+  print()
+
+n = int(input())
+a = [ [' '] * n for _ in range(n,0,-1) ]
+for i in range(n): 
+  for j in range(i,n):
+    a[i][j] = '*'
+for i in range(n):
+  for j in range(n):
+    print(a[i][j], end='')
+  print()
