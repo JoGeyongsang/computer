@@ -216,6 +216,29 @@ for i in a[1:]:
 print(maxi)
 print(a.index(maxi)+1)
 
+#6095
+a=[[0]*5 for _ in range(5)]
+n=int(input())
+for _ in range(n):
+  i,j = map(int, input().split())
+  a[i-1][j-1]=1
+for row in a:
+  for col in row:
+    print(col,end=' ')
+  print()
+
+n=int(input())
+shape =[[0]*19 for _ in range(19)]
+for i in range(n):
+  x,y=map(int,input().split())
+  shape[x-1][y-1]=1
+for i in range(19):
+  for j in range(19):
+    print(shape[i][j],end=' ')
+  print()
+
+
+
 
 n=int(input())
 for i in range(n,0,-1):
@@ -351,3 +374,35 @@ for i in range(10):
   i=n%42
   ans[i]=1
 print(sum(ans))
+
+n=int(input())
+maxi=0
+avg=0
+a=list(map(float,input().split()))
+for i in range(n):
+  if maxi<a[i]:
+    maxi=a[i]
+for i in range(n):
+  a[i]=a[i]/maxi*100.0
+  avg+=a[i]
+print(round(avg/n,2))
+
+maxi=0
+maxidx=0
+for i in range(1,10):
+  n=int(input())
+  if maxi< n:
+    maxi= n
+    maxidx = i
+print(maxi)
+print(maxidx)
+
+maxi=0
+maxidx=0
+for i in range(1,10):
+  n=int(input())
+  if maxi< n:
+    maxi= n
+    maxidx = i
+print(maxi)
+print(maxidx)
