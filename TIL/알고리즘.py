@@ -543,11 +543,151 @@ for a in range(1,n+1):
 
 ## o(n3)
 
-# 벨만 포드 알고리즘
+# 벨만 포드 알고리즘 
 # boj 타임머신 https://www.acmicpc.net/problem/11657
+## 음수 간선 순환이 있는 경우도 사용 가능 음수 간선의 순환 감지
+## O(VE)
 
+# 다익스트라 알고리즘 음수간선없다면 최적의 해를 찾을 수 있다
+# 벨만 포드 알고리즘 다익스트라 알고리즘에서의 최적의 해를 항상 포함 시간은 오래 걸리지만 음수간선 탐지 가능
 
+import sys
+input=sys.stdin.readline
+INF=int(1e9)
+def bf(start):
+    dist[start]=0
+    for i in range(n):
+        for j in range(m):
+            cur = edges[j][0]
+            next_node=edges[j][1]
+            cost=edges[j][2]
+            if dist[cur]!=INF and dist[next_node]>dist[cur]+cost:
+                dist[next_node]=dist[cur]+cost
+                if i==n-1:
+                    return True
+    return False
 
+n,m=map(int,input(0.split()))
+edges=[]
+dist=[INF]*(n+1)
+for _ in range(m):
+    a,b,c=map(int,input().split())
+    edges.append((a,b,c))
+negative_cycle=bf(1)
+if negative_cycle:
+    print('-1')
+else:
+    for i in range(2,n+1):
+        if dist[i]==INF:
+            print('-1')
+        else:
+            print(dist[i])
 
+# 서로소 집합 공통원소가 없는 두 집합 
+# 서로소 집합 자료구조는 합치기 찾기 자료구조
+# 서로소 집합 자료구조
+def find_parent(parent,x):
+    if parent[x]!= x:
+        return find_parent(parent,parent[x])
+    return x
 
+def union_parent(parent,a,b):
+    a=find_parent(parent,a)
+    b=find_parent(parent,b)
+    if a<b:
+        parent[b]=a
+    else:
+        parent[a]=b
+v,e =map(int,input().split())
+parent=[0]*(v+1)
+for i in ragne(1,v+1):
+    parent[i]=i
+for i in range(e):
+    a,b=map(int,input().split())
+    union_parent(parent,a,b)
+print('각 원소가 속한 집합: ', end=' ')
+for i in range(1,v+1):
+    print(find_parnetn(parent,i),end=' ')
+
+print()
+
+print('부모테이블: ',end=' ')
+for i in range(1,v+1):
+    print(parent[i],end=' ')
+
+# 경로압축
+# 특정 원소가 속한 집합을 찾기
+def find_parent(parent,x):
+# 루트 노드가 아니라면, 루트 노드를 찾을 때까지 재귀적으로 호출
+    if parent[x]!=x:
+        parent[x]=find_parent(parent,parent[x])
+    return parent[x]
+
+# 서로소 집합은 무방향 그래프 내에서 사이클을 판별할때 사용
+# 서로소 집합을 활용한 사이클 판별
+def find_parent(parent,x):
+    if parent[x]!=:
+        parent[x]=find_parent(parent,parent[x])
+    return parent[x]
+
+def union_parent(parent,a,b):
+    a=find_parent(parent,a)
+    b=find_parent(parent,b)
+    if a<b:
+        parent[b]=a
+    else:
+        parent[a]=b
+
+v,e = map(int,input().split())
+parent=[0]*(v+1)
+for i in range(1,v+1):
+    parent[i]=i
+cycle = False
+for i in range(e):
+    a,b=map(int,input().split())
+    if find_parent(parent,a)==find_parent(parent,b):
+        cycle=True
+        break
+    else:
+        union_parent(parent,a,b)
+if cycle:
+    print('사이클이 발생했습니다')
+else:
+    print('사이클이 발생하지 않았습니다')
+
+# 신장트리 그래프에서 모든 노드를 포함하면서 사이클이 존재하지 않는 부분 그래프
+# 최소신장트리 두 도시 a,b를 선택했을 때 a에서 b로 이동하는 경로가 반드시 존재하도록 도로를 설치
+# 크루스칼 알고리즘 그리디 알고리즘
+## 간선데이터를 비용에 따라 오름차순으로 적용 간선을 하나씩 확인하여 사이클이 발생하는지 확인
+## 최소신장트리에 포함되어있는 간선의 비용을 모두 더하면 최종비용이 됨
+
+def find_parent(parent,x):
+    if parent[x]!=x:
+        parent[x]=find_parent(parent,parent[x])
+    return paretn[x]
+
+def union_parent(parent,a,b):
+    a=find_parent(parent,a)
+    b=find_parent(parent,b)
+    if a<b:
+        parent[b]=a
+    else:
+        paretn[a]=b
+
+v,e=map(int,input().split())
+edges=[]
+result=0
+
+for i in range(1,v+1):
+    parent[i]=i
+for _ in range(e):
+    a,b,cost=map(int,input().split())
+    edges.append((cost,a,b))
+edges.sort()
+for edge in edges:
+    cost,a,b=edge
+    if find_parent(parent,a)!=find_parent(parent,b):
+        union_parent(parent,a,b)
+        result+=cost
+print(result)
 
