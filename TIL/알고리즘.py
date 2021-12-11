@@ -691,3 +691,184 @@ for edge in edges:
         result+=cost
 print(result)
 
+# 크루스칼 알고리즘 간선의 개수가 E개일때 O(ELOGE)의 시간복잡도 
+
+# 최소공통조상
+# boj lca문제 https://www.acmicpc.net/problem/11437
+## 최소공통조상 알고리즘 lca 
+### 먼저 두 노드의 깊이를 맞춘다 이후 거슬로 올라간다
+
+import sys
+sys.setrecusionlimit(int(1e5))
+n=in(input())
+parent=[0]*(n+1)
+d=[0]*(n+1)
+c=[0]*(n+1)
+graph=[[] for _ in range(n+1)]
+
+for _ in range(n-1):
+    a,b=map(int,input().split())
+    graph[a].append(b)
+    graph[b].append(a)
+
+def dfs(x,depth):
+    c[x]=True
+    d[x]=depth
+    for y in graph[x]:
+        if c[y]:
+            continue
+        parent[y]=x
+        dfs(y,depth+1)
+
+def lca(a,b):
+    while d[a]!=d[b]:
+        if d[a]>d[b]:
+            a=parent[a]
+        else:
+            b=parent[b]
+    while a!=b:
+        a=parent[a]
+        b=parent[b]
+    return a
+
+dfs(1,0)
+m=int(input())
+for i in range(m):
+    a,b=map(int,input().split())
+    print(lca(a,b))
+
+# lca 시간복잡도 O(NM)
+
+# lca 심화문제 https://www.acmicpc.net/problem/11438
+## 시간복잡도 O(mlogn)
+## 먼저 두 노드의 깊이를 맞춘다 이후에 거슬로 올라간다 
+
+import sys
+input=sys.stdin.readline
+sys.setrecusionlimint(int(1e5))
+LOG=21#2^20=1,000,000
+
+n=int(input())
+parent+[[0]*LOG for _ in range(n+1)]
+d=[0]*(n+1)
+c=[0]*(n+1)
+graph=[[] for _ in range(n+1)]
+for _ in range(n-1):
+    a,b=map(int,input().split())
+    graph[a].append(b)
+    graph[b].append(a)
+
+def dfs(x,depth):
+    c[x]=True
+    d[x]=depth
+    for y in graph[x]:
+        if c[y]:
+            continue
+        parent[y][0]=x
+        dfs(y,depth+1)
+
+def set_parent():
+    dfs(1,0)
+    for i in range(1,LOG):
+        for j in range(1,n+1):
+            parent[j][i]=parent[parent[j][i-1][i-1]]
+
+def lca(a,b):
+    if d[a]>d[b]:
+        a,b=b,a
+    for i in range(LOG-1,-1,-1):
+        if d[b]-d[a]>=(1<<i):
+    if a==b:
+        return a;
+    for i in range(LOG-1,-1,-1):
+        if parent[a][i]!=parent[b][i]:
+            a=parent[a][i]
+            b=parent[b][i]
+    return parent[a][0]
+set_parent()
+m=int(input())
+for i in range(m):
+    a,b=map(int,input().split())
+    print(lca(a,b))
+
+# 위상정렬 
+## 사이클이 없는 방향 그래프의 모든 노드를 방향성에 거스르지 않도록 순서대로 나열 dhe
+## 선수과목을 고려한 학습 순서 설정
+## 진입차수 특정한 노드로 들어오는 간선의 개수
+## 진출차수 특정한 노드에서 나가는 간선의 개수 
+## 사이클이 없는 방향 그래프(dag)여야 한다
+## 진입차수가 0인 모든 노드를 큐에 넣는다 
+## 큐에서 노드1을 꺼낸 뒤에 노드 1에서 나가는 간선제거 새롭게 진입차수가 이 된 노드들을 큐에 삽입
+## 위상정렬은 순환하지 않느 방향그래프(dag)에 대해서만 수행 여러가지답이 존재
+ 
+from collections import deque
+v,e=map(int,input().split())
+indegree=[0]*(v+1)
+graph=[[] for i in range(v+1)]
+for _ in range(e):
+    a,b=map(int,input().split())
+    graph[a].append(b)
+    indegree[b]+=1
+
+def topology_sort():
+    result=[]
+    q=deque()
+    for i in range(1,v+1):
+        if indegree[i]==0:
+            q.append(i)
+    while q:
+        now=q.popleft()
+        result.append(now)
+        for i in range[now]:
+            indegree[i]-=1
+            if indegree[i]==0:
+                q.append(i)
+    for i in result:
+        print(i,end=' ')
+topology_sort()
+
+## 시간복잡도 O(V+E)
+
+# 재귀함수 자기 자신을 다시 호출하는 함수 DFS
+## 종료조건을 포함한 재귀함수
+def recursive_function(i):
+    if i ==100:
+        return
+    print(i, '번째 재귀함수에서',i+1,'번째 재귀함수를 호출합니다')
+    recursive_function(i+1)
+    print(i,'번째 재귀함수를 종료합니다')
+recursive_function(1)
+
+# 팩토리얼 구현
+def factorial_iterative(n):
+    result=1
+    for i in range(i,n+1):
+        result*=i
+    return result
+
+def factorial_recursive(n):
+    if n<=1:
+        return 1
+    return n *factorial_recursive(n-1)
+print('반복적으로 구현: ',factorial_iterative(5))
+print('재귀적으로 구현: ',factorial_recursive(5))
+
+# 최대공약수 계산 유클리드 호제법 
+def gcd(a,b):
+    if a%b==0:
+        return b
+    else:
+        return gcd(b,a%b)
+print(gcd(192,162))
+
+## 모든 재귀함수는 반복문을 이용하여 동일한 기능을 구현
+## 스택을 사용해야 할 때 스택 라이브러리 대신에 재귀함수를 이용하는 경우가 많다
+
+# 유용한 표준 라이브러리
+
+## 내장함수 
+## itertools 순열 조합 라이브러리
+## heapq     힙 자료구조 우선순위 큐 기능
+## bisect    이진탐색기능
+## collections 덱 카운터 등의 유용한 자료구조 
+## math      필수적인 수학적 기능 팩토리얼 제곱근 최대공약수 삼각함수 파이 
