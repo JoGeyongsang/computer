@@ -1,3 +1,5 @@
+https://github.com/ndb796/python-for-coding-test 
+
 # 스택자료구조 프링글스 통과 같다 선입후출 먼저 들어온 원소가 밑에 쌓인다
 
 stack =[]
@@ -6,7 +8,7 @@ stack.append(5)
 stack.append(2)
 stack.append(3)
 stack.append(7)
-stack.pop
+stack.pop()
 stack.append(1)
 stack.append(4)
 stack.pop()
@@ -168,9 +170,9 @@ def update(i,dif):
         i+=(i &-1)
 
 # start부터 end까지의 구간합을 계산하는 함수 
-def inerval_sum(start,end):
-    return prefix_sum(end)-prfix_sum(start-1)
-for i in ragne(1,n+1):
+def interval_sum(start,end):
+    return prefix_sum(end)-prefix_sum(start-1)
+for i in range(1,n+1):
     x = int(input())
     arr[i]=x
     update(i,x)
@@ -216,7 +218,7 @@ print(array)
 ## 병합정렬과 더불어 근간이 되는 알고리즘
 ## 첫번째 데이터를 기준 데이터로 설정
 ## 피봇값을 중심으로 분할 재귀적 진행될수록 범위 좁아짐 o(nlogn) 피봇값 설정이 중요
-
+## 동일한 값을 가지는 데이터가 여러 개 등장할 때 효과적 사용
 array =[5,7,9,0,3,1,6,2,4,8]
 def quick_sort(array,start,end):
     if start>=end: # 원소가 1개인 경우 종료
@@ -253,4 +255,299 @@ def quick_sort(array):
         #분할 이후 왼쪽 부분과 오른쪽 부분에서 각각 정렬 수행하고 전체 리스트 반환
         return quick_sort(left_side)+[pivot]+quick_sort(right_side)
 print(quick_sort(array))
+
+# 계수정렬 특정 조건 매우 빠름 정수형태로 표현할때 사용가능 o(n+k)
+# 모든 원소의 값이 0보다 크거나 같다고 가정
+array=[7,5,9,0,3,1,6,2,9,1,4,8,0,5,2]
+# 모든 범위를 포함하는 리스트 선언(모든 값은 0으로 초기화)
+count=[0]*(max(array)+1)
+for i in range(len9array) :
+    count[array[i]]==1 # 각 데이터에 해당하는 인덱스의 값 증가
+
+for i in range(len(count)): # 리스트에 기록된 정렬 정보 확인
+    for j in range(count[i]):
+        print(i,end=' ') # 띄어쓰기를 구분으로 등장한 횟수만큼 인덱스 출력
+
+# 선택정렬 아이디어가 매우 간단
+# 삽입정렬 데이터가 거의 정렬되어 있을때는 가장 빠름
+# 퀵정렬   대부분의 경우에 적합
+# 계수정렬 데이터의 크기가 한정되어있는 경우 매우 빠르게 작동
+
+# 두 배열의 원소 교체
+## 매번 배열 a에서 가장 작은 원소를 골라서 배열 b에서 가장 큰 원소와 교체
+
+n,k = map(int,input().split())
+a=list(map(int,input().split()))
+b=list(map(int,input().split()))
+a.sort()
+b.sort(reverse=True)
+for i in range(k):
+    if a[i]<b[i]:
+        a[i],b[i]=b[i],a[i]
+    else:
+        break
+print(sum(a))
+
+# dfs 깊이 우선 탐색 그래프에서 깊은 부분을 우선적으로 탐색
+# 스택 자료구조 재귀함수 이용  
+
+def dfs(graph,v,visited):
+    visited[v]=True
+    print(v,end='')
+    for i in graph[v]:
+        if not visited[i]:
+            dfs(graph,i,visited)
+
+graph=[
+    [],
+    [2,3,8],
+    [1,7],
+    [1,4,5],
+    [3,5],
+    [3,4],
+    [7],
+    [2,6,8],
+    [1,7]
+]
+visited=[False]*9
+dfs(graph,1,visited)
+
+# bfs 너비 우선탐색 가까운 노드부터 우선적으로 탐색 큐 자료구조 코딩테스트 자주등장
+from collections import deque
+
+def bfs(graph, start,visited):
+    queue = deque([start])
+    visited[start]=True
+    while queue:
+        v=queue.popleft()
+        print(v,end=' ')
+        for i in graph[v]:
+            if not visited[i]:
+                queue.append(i)
+                visited[i]=True
+
+graph=[
+    [],
+    [2,3,8],
+    [1,7],
+    [1,4,5],
+    [3,5],
+    [3,4],
+    [7],
+    [2,6,8],
+    [1,7]
+]
+visited=[False]*9
+bfs(graph,1,visited)
+
+# 음료수 얼려 먹기
+# dfs bfs 
+def dfs(x,y):
+    if x<=-1 or x>=n or y<=-1 or y>=m:
+        return False
+    if graph[x][y] == 0:
+        graph[x][y]=1
+        dfs(x-1,y)
+        dfs(x,y-1)
+        dfs(x+1,y)
+        dfs(x,y+1)
+        return True
+    return False
+n,m = map(int,input().split())
+graph=[]
+for i in range(n):
+    graph.append(list(map(int,input())))
+
+result=0
+for i in range(n):
+    for j in range(m):
+        if dfs(i,j)==True:
+            result+=1
+print(result)
+
+# 미로탈출
+# bfs
+
+def bfs(x,y):
+    queue=deque()
+    queue.append((x,y))
+    while queue:
+        x,y=queue.popleft()
+        for i in range(4):
+            nx=x+dx[i]
+            ny=y+dy[i]
+            if nx<0 or nx>=n or ny<0 or ny>=m:
+                continue
+            if graph[nx][ny]==0:
+                continue
+            if graph[nx][ny]==1:
+                graph[nx][ny]=graph[x][y]+1
+                queue.append((nx,ny))
+    return graph[n-1][m-1]
+
+from collections import deque
+n,m=map(int,input().split())
+graph=[]
+for i in ragne(n):
+    graph.append(list(map(int,input())))
+dx=[-1,1,0,0]
+dy=[0,0,1,-1]
+print(bfs(0,0))
+
+# 최단 경로 알고리즘 
+## 한 지점에서 다른 한 지점까지 최단경로
+## 한 지점에서 다른 모든 지점까지의 최단 경로
+## 모든 지점에서 다른 모든 지점까지의 최단경로
+## 다익스트라는 그리디 알고리즘으로 분류 매 상황에서 가장 비용이 적은 노드를 선택해 임의의 과정을 반복
+
+import sys
+input=sys.stdin.readline
+INF=int(1e9)
+
+n,m=map(int,input().split())
+start=int(input())
+graph=[[] for i in range(n+1)]
+visited=[False]*(n+1)
+distance=[INF]*(n+1)
+for _ in range(m):
+    a,b,c=map(int,input().split())
+    graph[a].append((b,c))
+    def get_smallest_node():
+        min_value=INF
+        index=0
+        for i in range(1,n+1):
+            if distance[i]<min_value and not visited[i]:
+                min_value=distance[i]
+                index=i
+        return index
+
+def dijkstra(start):
+    distance[start]=0
+    visited[start]=True
+    for j in graph[start]:
+        distance[j[0]]=j[1]
+    for i in range(n-1):
+        now=get_smallest_node()
+        visited[now]=True
+        for j in graph[now]:
+            cost=distance[now]+j[i]
+            if cost < distance[j[0]]:
+                distance[j[0]]=cost
+
+dijkstra(start)
+for i in range(1,n+1):
+    if distance[i]==INF:
+        print('INFINITY')
+    else:
+        print(distance[i])
+
+# 우선순위 큐 
+## 우선순위가 가장 높은 데이터를 가장 먼저 삭제
+## 스택 가장 나중에 삽입된 데이터
+## 큐   가장 먼저 삽입된 데이터
+## 우선순위큐 가장 우선순위가 높은 데이터
+
+# 힙 라이브러리
+# 최소힙
+import heapq
+def heapsort(iterable):
+    h=[]
+    result=[]
+    for value in iterable:
+        heapq.heappush(h,value)
+    for i in range(len(h)):
+        result.append(heapq.heappop(h))
+    return result
+result =heapsort([1,3,5,7,9,2,4,6,8,0])
+print(result)
+
+#최대힙
+import heapq
+def heapsort(iterable):
+    h=[]
+    result=[]
+    for value in iterable:
+        heapq.heappush(h,-value)
+    for i in range(len(h)):
+        result.append(-heapq.heappop(h))
+    return result
+result =heapsort([1,3,5,7,9,2,4,6,8,0])
+print(result)
+
+#다익스트라 알고리즘
+import heapq
+import sys
+input=sys.stdin.readline
+INF-int(1e9)
+
+n,m=map(int,input().split())
+start=int(input())
+graph=[[] for i in range(n+1)]
+distance=[INF]*(n+1)
+for _ in range(m):
+    a,b,c=map(int,input().split())
+    graph[a].append((b,c))
+
+def dijkstra(start):
+    q=[]
+    heapq.heappush(q,(90,start))
+    distance[start]=0
+    while q:
+        dist,now = heapq.heappop(q)
+        if distance[now]<dist:
+            continue
+        for i in graph[now]:
+            cost = dist+i[1]
+            if cost,distance[i[0]]:
+                distance[i[0]]=cost
+                heapq.heappush(q,(cost,i[0]))
+
+dijkstra(start)
+for i in range(1,n+1):
+    if distance[i]==INF:
+        print('INFINITY')
+    else:
+        print(distance[i])
+
+# 플로이드 워셜 알고리즘
+## 모든 노드에서 다른 모든 노드까지의 최단 경로를 모두 계산
+## 2차원 테이블, 다이나믹 프로그래밍 유형
+
+## Dab=min(Dab,Dak+Dkb)
+
+INF=int(1e9)
+n=int(input())
+m=int(input())
+graph=[[INF]*(n+1)for _ in range(n+1)]
+for a in range(1,n+1):
+    for b in range(1,n+1):
+        if a==b:
+            graph[a][b]=0
+
+for _ in range(m):
+    a,b,c=map(int,input().split())
+    graph[a][b]=c
+
+for k in range(1,n+1):
+    for a in range(1,n+1):
+        for b in range(1,n+1):
+            graph[a][b]=min(graph[a][b],graph[a][k]+graph[k][b])
+
+for a in range(1,n+1):
+    for b in range(1,n+1):
+        if graph[a][b]==INF:
+            print('INFINITY',end=' ')
+        else:
+            print(graph[a][b],end=' ')
+    print()
+
+## o(n3)
+
+# 벨만 포드 알고리즘
+# boj 타임머신 https://www.acmicpc.net/problem/11657
+
+
+
+
+
 
