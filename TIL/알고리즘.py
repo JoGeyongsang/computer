@@ -872,3 +872,196 @@ print(gcd(192,162))
 ## bisect    이진탐색기능
 ## collections 덱 카운터 등의 유용한 자료구조 
 ## math      필수적인 수학적 기능 팩토리얼 제곱근 최대공약수 삼각함수 파이 
+
+# sum()
+result=sum([1,2,3,4,5])
+print(print(result))
+
+# min(),max()
+min_result=min(7,3,5,2)
+max_result=max(7,3,5,2)
+print(min_result,max_result)
+
+# eval()  계산한 결과를 수형태로 반환 
+result=eval('(3+5)*7')
+print(result)
+
+# sorted()
+result=sorted([9,1,8,5,4])
+reverse_result=sorted([9,1,8,4,5],reverse=True)
+print(result)
+print(reverse_result)
+
+# sorted()with key
+array=[('홍길동',35),('이순신',75),('아무개',50)]
+result=sorted(array,key=lambda x: x[1],reverse=True)
+print(result)
+
+# 순열 nPr 서로 다른 n개에서 서로다른 r개를 선택해 일렬로 나열
+# 조합 nCr 서로 다른 n개에서 순서 상관없이 서로 다른 r개를 선택해 나열
+
+# 순열 
+from itertools import permutations
+data=['A','B','C']
+result=list(permutations(data,3))
+print(result)
+
+# 조합
+from itertools import combinations
+data=['A','B','C']
+result=list(combinations(data,2))
+print(result)
+
+# 중복순열
+from itertools import product
+data=['A','B','C']
+result=list(product(data,repeat=2))
+print(result)
+
+# 중복조합
+from itertools import combinations_with_replacement
+data=['A','B','C']
+result=list(combinations_with_replacement(data,2))
+print(result)
+
+# counter 등장 회수를 세는 기능
+from collections import Counter
+counter=Counter(['red','blue','red','green','blue','blue'])
+print(counter['blue'])
+print(counter['green'])
+print(dict(counter))
+
+# 최대공약수 최소공배수
+import math
+def lcm(a,b):
+    return a*b//math.gcd(a,b)
+a=21
+b=14
+
+print(math.gcd(21,14)) # 최대공약수
+print(lcm(21,14)) # 최소공배수
+
+# 소수 1보다 큰 자연수 중에서 1과 자기자신을 제외한 자연수로는 나누어 떨어지지 않는 자연수 
+def is_prime_number(x):
+    for i in range(2,x):
+        if x%i==0:
+            return False
+    return True
+
+print(is_prime_number(4))
+print(is_prime_number(7))
+
+import math
+def is_prime_number(x):
+    for i in range(math.sqrt(x)+1):
+        if x%i==0:
+            return False
+    return True
+
+print(is_prime_number(4))
+print(is_prime_number(7))
+
+# 다수의 소수 판별 에라토스테네스의 체 알고리즘 
+import math
+n=1000
+array=[True for i in range(n+1)]
+for i in range(2,int(math,sqrt(n))+1):
+    if array[i]==True
+    j=2
+    while i*j<=n:
+        array[i*j]=False
+        j+=1
+    
+for i in range(2,n+1):
+    if array[i]:
+        print(i,end=' ')
+
+# 시간복잡도 o(nloglogn) 메모리는 많이 필요 
+
+# 이진 탐색 알고리즘
+# 순차탐색 디이터를 찾기 위해 앞에서부터 데이터를 하나씩 확인
+# 이진탐색 탐색 범위를 절반씩 좁혀가며 데이터를 탐색
+# 시간복잡도 o(logn)
+
+def binary_search(array,target,start,end):
+    if start>end:
+        return None
+    mid =(start+end)//2
+    if array[mid]==target:
+        return mid
+    elif array[mid]>target:
+        return binary_search(array,target,start,mid-1)
+    else:
+        return binary_search(array,target,start,mid+1,end)
+
+n,target=list(map(int,input().split()))
+array=list(map(int,input().split()))
+result=binary_search(array,target,0,n-1)
+if result==None:
+    print('원소가 존재하지 않습니다')
+else:
+    print(result+1)
+
+# bicect_left(a,x) 정렬된 순서를 유지하면서 배열 a에 x를 삽입할 가장 왼쪽 인덱스를 반환
+# bisect_right(a,x) 정렬된 순서를 유지하면서 배열a에 x를 삽입할 가장 오른쪽 인덱스를 반환
+
+from bisect import bisect_left,bisect_right
+a=[1,2,4,4,8]
+x=4
+print(bisect_left(a,x))
+print(bisect_left(a,x))
+
+# 값이 특정 범위에 속하는 데이터 개수 구하기
+from bisect import bisect_left, bisect_right
+def count_by_range(a,left_value, right_value):
+    right_index=bisect_right(a,right_value)
+    left_index=bisect_left(a,left_value)
+    return right_index-left_index
+
+a=[1,2,3,3,3,3,4,4,8,9]
+print(count_by_range(a,4,4))
+print(count_by_range(a,-1,3))
+
+# 파라메트릭 서치 최적화문제를 결정 예 아니오 
+# 떡볶이 떡 만들기 적절한 높이를 찾을 때까지 이진탐색을 수행 높이 h를 반복조정 조건의 만족 여부에 따라서 탐색 범위를 좁혀서 해결
+
+n,m=list(int,input().split()))
+array=list(map(int,input().spllit()))
+start=0
+end=max(array)
+result=0
+while(start<=end):
+    total=0
+    mid=(start+end)//2
+    for x in array:
+        if x > mid:
+            total+=x-mid
+    if total<m:
+        end=mid-1
+    else:
+        result=mid
+        start=mid+1
+print(result)
+
+# 정렬된 배열에서 특정 수의 개수 구하기
+from bisect import bisect_left,bisect_right
+def count_by_range(array,left_value,right_value):
+    right_index=bisect_right(array,right_value)
+    left_index=bisect_left(array,left_value)
+    return right_index-left_index
+
+n,x=map(int,input().split()))
+array=list(map(int,inpu(0.split())))
+count=count_by_range(array,x,y)
+
+if count==0:
+    print(-1)
+else:
+    print(count)
+
+# 동적 계획법
+# 다이나믹 프로그래밍 메모리를 적절히 사용하여 수행 시간 효율성을 비약적으로 향상
+# 이미 계산된 결과는 별도의 메모리 영역에 저장하여 다시 계산하지 않음
+# 탑다운 바텀업
+# 동적(dynamic) 프로그램이 실행되는 도중에 시행에 필요한 메모리를 할당하는 기법
+
