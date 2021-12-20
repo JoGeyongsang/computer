@@ -19,6 +19,7 @@ print(stack) #최하단 원소부터 출력
 # 큐 자료구조 입구 출구 모두 뚫려있는 터널 선입선출
 
 from collections import deque
+from typing import no_type_check
 
 queue = deque()
 
@@ -1092,10 +1093,252 @@ print(fibo(99))
 d=[0]*100
 d[1]=1
 d[2]=1
-n=00
+n=99
 for i in range(3,n+1):
     d[i]=d[i-1]+d[i-2]
 print(d[n])
 
+# 피보나치 수열 메모이제이션 동작분석
+d=[0]*100
+def fubi(x):
+    print('f('+str(x)+')',end=' ')
+    if x==1 or x ==2:
+        return 1
+    if d[x]!=0:
+        return d[x]
+    d[x]= fibo(x-1)+fibo(x-2)
+    return d[x]
+fibo(6)
 
+# 다이나믹 프로그래밍 최적 부분구조 부분 문제 중복
+# 분할정복 최적부분구조 반복계산x
+# 가장 먼저 그리디, 구현, 완전탐색 등 다른 알고리즘으로 풀이 방법이 떠오르지 않는다면 다이나믹 프로그래밍을 고려 
+# 일단 재귀함수로 비효율적인 완전탐색 프로그램을 작성한뒤 탑다운 작은 문제에서 구한 답이 큰 문제에서 그대로 사용될 수 있으면 코드를 개선하는 방법을 사용
 
+# 개미전사
+n=int(input())
+array=list(map(int,input().split()))
+d=[0]*100
+d[0]=array[0]
+d[1]=max(array[0],array[1])
+for i in range(2,n):
+    d[i]=max(d[i-1],d[i-2]+array[i])
+print(d[n-1])
+
+x=int(input())
+d=[0]*30001
+for i in range(2,x+1):
+    d[i]=d[i-1]+1
+    if i%2==0:
+        d[i]=min(d[i],d[i//2]+1)
+    if i%3==0:
+        d[i]=min(d[i],d[i//5]+1)
+    if i%5==0:
+        d[i]=min(d[i],d[i//5]+1)
+print(d[x])
+
+# 효율적인 화폐구성
+n,m=map(int,input().split())
+array=[]
+for i in range(n):
+    array.append(int(input()))
+d=[10001]*(m+1)
+d[0]=0
+for i in range(n):
+    for j in range(array[i],m+1):
+        if d[j-array[i]]!=10001:
+            d[j]=min(d[j],d[j-array[i]]+1)
+if d[m]==10001:
+    print(-1)
+else:
+    print(d[m])
+
+# 금광
+for tc in range(int(input())):
+    n,m=map(int,input().split())
+    array=list(map(int,input().split()))
+    dp=[]
+    index=0
+    for i in range(n):
+        dp.append(array[index:index+m])
+        index+=m
+    for j in range(1,m):
+        for i in range(n):
+            if i==0: 
+                left_up=0
+            else:
+                left_up=dp[i-1][j-1]
+            if i==n-1:
+                left_down=0
+            else:
+                left_down=dp[i+1][j-1]
+            left=dp[i][j-1]
+            dp[i][j]=dp[i][j]+max(left_up,left_down,left)
+    result=0
+    for i in range(n):
+        result=max(result,dp[i][m-1])
+    print(result)
+
+# 병사 배치하기
+n=int(input())
+array=list(mpa(int,input().split()))
+array.reverse()
+dp=[1]*n
+for i in range(1,n):
+    for j in range(0,i):
+        if array[j]<array[i]:
+            dp[i]=max(dp[i],dp[j]+1)
+print(n-max(dp))
+
+# 그리디 알고리즘 현재 상황에서 지금 당장 좋은 것만 고르는 방법 최적의 해가 되는 상황에서 이를 추론할 수 있어야 풀리도록 출제
+# 거스름돈
+n=1260
+count=0
+array=[500,100,50,10]
+for coin in array:
+    count+=n//coin
+    n%=coin
+print(count)
+
+# 1이 될때까지
+n,k = map(int,input().split())
+result=0
+while True:
+    target=(n//k)*kresult +=(n-target)
+    n=target
+    if n<k:
+        break
+    result+=1
+    n//=k
+result+=(n-1)
+print(result)
+
+# 곱하기 혹은 더하기
+data=input()
+result=int(data[0])
+for i in range(1,len(data)):
+    num=int(data[i])
+    if num <=1 or result<=1:
+        result+=num
+    else:
+        result*=num
+
+print(result)
+
+#모험가 길드
+n=int(input())
+data=list(map(int,input().split()))
+data.sort()
+result=0
+count=0
+for i in data:
+    count+=1
+    if count>=i:
+        result+=1
+        count=0
+print(result)
+
+# 구현
+# 풀이를 떠올리는 것은 쉽지만 소스코드로 옮기기 어려운 문제
+# 알고리즘 간단 코드가 김
+# 실수연산 소수점자리까지 출력
+# 문자열 끊어처리
+# 적절한 라이브러리
+
+# 행열(matrix)
+for i in range(5):
+    for j in range(5):
+        print('(',i,',',j,',end='' )
+    print()
+
+# 동,북,서,남
+dx=[0,-1,0,1]
+dy=[1,0,-1,0]
+x,y=2,2
+for i in range(4):
+    nx=x+dx[i]
+    ny=y+dy[i]
+    print(nx,ny)
+
+# 상하좌우
+n=int(input())
+x,y=1,1
+plans=input().split()
+dx=[0,0,-1,1]
+dy=[-1,1,0,0]
+move_types=['L','R','U','D']
+for plan in plans:
+    for i in range(len(move_types)):
+        if plan==move_types[i]:
+            nx=x+dx[i]
+            ny=y+dy[i]
+    if nx<1 or ny<1 or nx>n or ny>n:
+        continue
+    x,y=nx,no_type_check
+print(x,y)
+
+# 시각 
+h=int(input())
+count=0
+for i in range(h+1):
+    for j in range(60):
+        if '3'in str(i)+str(j)+str(k):
+            count+=1
+print(count)
+
+# 왕실의 나이트
+input_data=input()
+row=int(input_data[1])
+column=int(ord(input_data[0]))-int(ord('a'))+1
+steps=[(-2,-1),(-1,-2),(1,-2),(2,-1),(2,1),(1,2),(-1,2),(-2,1)]
+result=0
+for step in steps:
+    next_row=row+step[0]
+    next_column=column+step[1]
+    if next_row>=1 and next_row<=8 and next_column>=1 and next_column<=8:
+        result+=1
+print(result)
+
+# 문자재정렬
+data=input()
+result=[]
+value=0
+for x in data:
+    if x.isalpha():
+        else:
+            value+=int(x)
+ruesult.sort()
+if value!=0:
+    result.append(str(value))
+print(''.join(result))
+
+# 투 포인터 알고리즘 리스트에 순차적으로 접근해야할 때 두개의 점 위치를 기록하면서 처리 시작점과 끝점
+
+# 특정한 합을 가지는 부분 연속 수열 찾기
+n=5
+m=5
+data=[1,2,3,4,5]
+count=0
+interval_sum=0
+end=0
+for start in range(n):
+    while interval_sum<m and end<n:
+        interval_sum+=data[end]
+        end+=1
+    if interval_sum==m:
+        count+=1
+    interval_sum-=data[start]
+print(count)
+
+# 구간 합 빠르게 계산하기
+# 접두사합 배열의 맨 앞부터 특정 위치까지 합을 미리 구해 놓은것
+n=5
+data=[10,20,30,40,50]
+sum_value=0
+prefix_sum=[0]
+for i in data:
+    sum_value+=i
+    prefix_sum.append(sum_value)
+left=3
+right=4
+print(prefix_sum[right]-prefix_sum[left-1])

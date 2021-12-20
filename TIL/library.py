@@ -28,3 +28,28 @@ display(arrn[1:4,1])
 arr=np.arange(1,46)
 arr
 np.random.choice(arr,size=6,replace=False)
+
+import numpy as np
+
+# NaN 결측치 비어있는값
+
+np.random.rand(10)
+
+arr=np.arrange(1,11)
+np.random.choice(arr,size=5,replace=False)
+
+arr1d=np.random.randint(0,10,size=4)
+arr1d
+
+arr2d=np.random.randint(1,10,size=(3,3))
+
+import numpy as np
+import pandas as pd
+
+weight = pd.DataFrame([
+  [76.4, 'kg'],
+  [75.7, 'kg'],
+  [76, 'kg'],
+  [76.2, 'kg']
+])
+weight

@@ -1,0 +1,21 @@
+.title {
+    display: inline;
+}
+.list {
+    display: inline;
+    position: absolute;
+    left:500px;
+    bottom:15px;
+}
+.list-item {
+    display: inline;
+}
+.container {
+    border: 1px dashed blue;
+    position: relative;
+}
+.span {
+    position: absolute;
+    top:30px;
+    left: 180px;
+}
