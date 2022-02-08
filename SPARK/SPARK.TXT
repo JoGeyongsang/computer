@@ -1,0 +1,163 @@
+scala> val tranFile=sc.textFile("first-edition/ch04/"+"ch04_data_transactions.txt")
+tranFile: org.apache.spark.rdd.RDD[String] = first-edition/ch04/ch04_data_transactions.txt MapPartitionsRDD[1] at textFile at <console>:24
+
+scala> val tranData=tranFile.map(_.split("#"))
+tranData: org.apache.spark.rdd.RDD[Array[String]] = MapPartitionsRDD[2] at map at <console>:26
+
+scala> var transByCust=tranData.map(tran=>(tran(2).toInt,tran))
+transByCust: org.apache.spark.rdd.RDD[(Int, Array[String])] = MapPartitionsRDD[3] at map at <console>:28
+
+scala> tranByCust.keys.distinct().count()
+<console>:24: error: not found: value tranByCust
+       tranByCust.keys.distinct().count()
+       ^
+
+scala> transByCust.keys.distinct().count()
+res1: Long = 100
+
+scala> transByCust.countByKey()
+res2: scala.collection.Map[Int,Long] = Map(69 -> 7, 88 -> 5, 5 -> 11, 10 -> 7, 56 -> 17, 42 -> 7, 24 -> 9, 37 -> 7, 25 -> 12, 52 -> 9, 14 -> 8, 20 -> 8, 46 -> 9, 93 -> 12, 57 -> 8, 78 -> 11, 29 -> 9, 84 -> 9, 61 -> 8, 89 -> 9, 1 -> 9, 74 -> 11, 6 -> 7, 60 -> 4, 85 -> 9, 28 -> 11, 38 -> 9, 70 -> 8, 21 -> 13, 33 -> 9, 92 -> 8, 65 -> 10, 97 -> 12, 9 -> 7, 53 -> 19, 77 -> 11, 96 -> 8, 13 -> 12, 41 -> 12, 73 -> 7, 2 -> 15, 32 -> 14, 34 -> 14, 45 -> 11, 64 -> 10, 17 -> 13, 22 -> 10, 44 -> 8, 59 -> 9, 27 -> 7, 71 -> 10, 12 -> 7, 54 -> 7, 49 -> 8, 86 -> 9, 81 -> 9, 76 -> 15, 7 -> 10, 39 -> 11, 98 -> 11, 91 -> 13, 66 -> 11, 3 -> 13, 80 -> 7, 35 -> 10, 48 -> 5, 63 -> 12, 18 -> 9, 95 -> 8, 50 -> 14, 67 -> 5, 16 -> 8, 31 -> 14, 11 -> 8, 72 -> 7, 43 -> 12, 99 -> 12, 87 -> 10, 40 -> 10, 26 -> 11, 55 ...
+scala> transByCust.countByKey().values.sum
+res3: Long = 1000
+
+scala> val(cid,purch)=transByCust.countByKey().toSeq.sortBy(_._2).last
+cid: Int = 53
+purch: Long = 19
+
+scala> var complTrans=Array(Array("2015-03-30","11:59 PM","53","4","1","0.00"))
+complTrans: Array[Array[String]] = Array(Array(2015-03-30, 11:59 PM, 53, 4, 1, 0.00))
+
+scala> transByCust.lookup(53)
+res4: Seq[Array[String]] = WrappedArray(Array(2015-03-30, 6:18 AM, 53, 42, 5, 2197.85), Array(2015-03-30, 4:42 AM, 53, 44, 6, 9182.08), Array(2015-03-30, 2:51 AM, 53, 59, 5, 3154.43), Array(2015-03-30, 5:57 PM, 53, 31, 5, 6649.27), Array(2015-03-30, 6:11 AM, 53, 33, 10, 2353.72), Array(2015-03-30, 9:46 PM, 53, 93, 1, 2889.03), Array(2015-03-30, 4:15 PM, 53, 72, 7, 9157.55), Array(2015-03-30, 2:42 PM, 53, 94, 1, 921.65), Array(2015-03-30, 8:30 AM, 53, 38, 5, 4000.92), Array(2015-03-30, 6:06 AM, 53, 12, 6, 2174.02), Array(2015-03-30, 3:44 AM, 53, 47, 1, 7556.32), Array(2015-03-30, 10:25 AM, 53, 30, 2, 5107.0), Array(2015-03-30, 1:48 AM, 53, 58, 4, 718.93), Array(2015-03-30, 9:31 AM, 53, 18, 4, 8214.79), Array(2015-03-30, 9:04 AM, 53, 68, 4, 9246.59), Array(2015-03-30, 1:51 AM, 53, 40, 1, ...
+scala> transByCust.lookup(53).foreach(tran=>println=>println(tran.mkString(",")))
+<console>:31: error: missing parameter type
+       transByCust.lookup(53).foreach(tran=>println=>println(tran.mkString(",")))
+                                            ^
+
+scala> transByCust.lookup(53).foreach(tran=>println(tran.mkString(",")))
+2015-03-30,6:18 AM,53,42,5,2197.85
+2015-03-30,4:42 AM,53,44,6,9182.08
+2015-03-30,2:51 AM,53,59,5,3154.43
+2015-03-30,5:57 PM,53,31,5,6649.27
+2015-03-30,6:11 AM,53,33,10,2353.72
+2015-03-30,9:46 PM,53,93,1,2889.03
+2015-03-30,4:15 PM,53,72,7,9157.55
+2015-03-30,2:42 PM,53,94,1,921.65
+2015-03-30,8:30 AM,53,38,5,4000.92
+2015-03-30,6:06 AM,53,12,6,2174.02
+2015-03-30,3:44 AM,53,47,1,7556.32
+2015-03-30,10:25 AM,53,30,2,5107.0
+2015-03-30,1:48 AM,53,58,4,718.93
+2015-03-30,9:31 AM,53,18,4,8214.79
+2015-03-30,9:04 AM,53,68,4,9246.59
+2015-03-30,1:51 AM,53,40,1,4095.5
+2015-03-30,1:53 PM,53,85,9,1630.24
+2015-03-30,6:51 PM,53,100,1,1694.52
+2015-03-30,7:39 PM,53,100,8,7885.35
+
+scala> transByCust=transByCust.mapValues(tran=>{
+     | if(tran(3).toInt==25 && tran(4).toDouble >1)
+     | tran(5)=(tran(5).toDouble*0.95).toString
+     | tran})
+transByCust: org.apache.spark.rdd.RDD[(Int, Array[String])] = MapPartitionsRDD[18] at mapValues at <console>:30
+
+scala> transByCust=transByCust.flatMapValues(tran=>{
+     | val cloned=tran==81 && tran(4).toDouble >=5){
+<console>:2: error: ';' expected but ')' found.
+val cloned=tran==81 && tran(4).toDouble >=5){
+                                           ^
+
+scala> val cloned=tran==81 && tran(4).toDouble >=5){
+<console>:1: error: ';' expected but ')' found.
+val cloned=tran==81 && tran(4).toDouble >=5){
+                                           ^
+
+scala> transByCust=transByCust.mapValues(tran=>{
+     | if(tran(3).toInt==81 && tran(4).toDouble >=5){
+     | val cloned=tran.clone()
+     | cloned(5) ="0.00"; cloned(3) ="70"; cloned(4)="1";
+     | List(tran,cloned)
+     | }
+     | else
+     | List(tran)
+     | })
+<console>:34: error: type mismatch;
+ found   : List[Array[String]]
+ required: Array[String]
+       List(tran,cloned)
+           ^
+<console>:37: error: type mismatch;
+ found   : List[Array[String]]
+ required: Array[String]
+       List(tran)
+           ^
+
+scala> transByCust=transByCust.mapValues(tran=>{
+     | if(tran(3).toInt==81 && tran(4).toDouble >=5){
+     | val cloned=tran.clone()
+     | cloned(5) ="0.00"; cloned(3) ="70"; cloned(4)="1";
+     | List(tran,cloned)
+     | }
+     | else
+     | List(tran)
+     | })
+<console>:34: error: type mismatch;
+ found   : List[Array[String]]
+ required: Array[String]
+       List(tran,cloned)
+           ^
+<console>:37: error: type mismatch;
+ found   : List[Array[String]]
+ required: Array[String]
+       List(tran)
+           ^
+
+scala> transByCust=transByCust.flatMapValues(tran=>{
+     | if(tran(3).toInt==81 && tran(4).toDouble >=5){
+     | val cloned=tran.clone()
+     | cloned(5) ="0.00"; cloned(3) ="70"; cloned(4)="1";
+     | List(tran,cloned)
+     | }else
+     | List(tran)
+     | })
+transByCust: org.apache.spark.rdd.RDD[(Int, Array[String])] = MapPartitionsRDD[19] at flatMapValues at <console>:30
+
+scala> val amounts=transByCust.mapValues(t=>t(5).toDouble)
+amounts: org.apache.spark.rdd.RDD[(Int, Double)] = MapPartitionsRDD[20] at mapValues at <console>:30
+
+scala> val totals=amounts=amounts.foldByKey(0)((p1,p2)=>p1+p2).collect()
+<console>:32: error: reassignment to val
+       val totals=amounts=amounts.foldByKey(0)((p1,p2)=>p1+p2).collect()
+                         ^
+
+scala> val totals=amounts.foldByKey(0)((p1,p2)=>p1+p2).collect()
+totals: Array[(Int, Double)] = Array((84,53020.619999999995), (39,49842.78), (96,36928.57), (81,40219.15), (15,55853.280000000006), (21,62274.25), (66,52130.009999999995), (54,36307.04), (48,17949.850000000002), (30,19194.91), (27,57023.96000000001), (24,39375.28), (36,25640.04), (51,83312.12), (93,58248.0525), (33,54505.87000000001), (42,30423.7215), (57,44338.58), (45,78566.86), (75,50997.21950000001), (63,61878.75), (72,32216.130000000005), (6,30549.28), (69,26220.120000000003), (3,67897.68999999999), (12,35521.35), (9,33582.81), (18,35827.33), (60,17333.71), (90,39947.380000000005), (78,48047.53), (87,52329.59999999999), (99,58484.11), (94,51430.14000000001), (13,50407.880000000005), (19,33422.229999999996), (34,77332.59), (52,58348.020000000004), (61,32973.99), (100,60120.66), (4,4...
+scala> totals.toSeq.sortBy(_._2).last
+res7: (Int, Double) = (76,100049.0)
+
+scala> amounts.foldByKey(100000)((p1,p2)=>p1+p2).collect()
+res8: Array[(Int, Double)] = Array((84,253020.62), (39,249842.77999999997), (96,236928.57), (81,240219.15000000002), (15,255853.28), (21,262274.25), (66,252130.00999999998), (54,236307.04), (48,217949.85), (30,219194.91), (27,257023.96), (24,239375.28), (36,225640.04), (51,283312.12), (93,258248.0525), (33,254505.87), (42,230423.72149999999), (57,244338.58000000002), (45,278566.86), (75,250997.2195), (63,261878.75000000003), (72,232216.13), (6,230549.27999999997), (69,226220.12), (3,267897.69), (12,235521.35), (9,233582.81), (18,235827.33000000002), (60,217333.71000000002), (90,239947.38), (78,248047.53), (87,252329.59999999998), (99,258484.11000000002), (94,251430.14), (13,250407.88), (19,233422.23), (34,277332.59), (52,258348.02000000002), (61,232973.99), (100,260120.66), (4,241801.35...
+scala> complTrans=complTrans:+Array("2015-03-30","11:59 PM","76","63","1","0.00")
+complTrans: Array[Array[String]] = [[Ljava.lang.String;@1f974b5d
+
+scala> transByCust=transByCust.union(sc.parallelize(complTrans).map(t=>(t(2).toInt,t)))
+transByCust: org.apache.spark.rdd.RDD[(Int, Array[String])] = UnionRDD[25] at union at <console>:32
+
+scala> transByCust.map(t=>t._2.mkString("#")).saveAsTextFile("ch04out-transByCust")
+
+scala> val prods=transByCust.aggregateByKey(List[String]())(
+     | (prods ,tran)=>prods ::: List(tran(3)), (prods1,(prods2)=> prods1 ::: prods2)
+     | asdf
+     | prods.collect()
+     | )))
+<console>:5: error: ';' expected but ')' found.
+)))
+ ^
+
+scala> val prods=transByCust.aggregateByKey(List[String]())(
+     | (prods ,tran)=>prods ::: List(tran(3)),
+     | (prods1,prods2)=> prods1 ::: prods2)
+prods: org.apache.spark.rdd.RDD[(Int, List[String])] = ShuffledRDD[28] at aggregateByKey at <console>:30
+
+scala> prods.collect()
+res10: Array[(Int, List[String])] = Array((84,List(55, 10, 14, 62, 79, 59, 92, 81, 50)), (39,List(28, 92, 87, 58, 4, 28, 11, 56, 5, 4, 50)), (96,List(37, 31, 17, 88, 97, 81, 58, 78)), (81,List(44, 6, 29, 82, 12, 69, 58, 91, 36)), (15,List(13, 24, 16, 4, 48, 44, 59, 39, 4, 57)), (21,List(44, 46, 21, 28, 7, 44, 89, 38, 27, 69, 84, 64, 59)), (66,List(38, 78, 17, 29, 62, 44, 55, 19, 62, 86, 58)), (54,List(78, 57, 51, 4, 98, 46, 47)), (48,List(16, 7, 47, 52, 62)), (30,List(82, 74, 1, 97, 51)), (27,List(1, 84, 26, 70, 24, 24, 59)), (24,List(58, 76, 29, 39, 1, 4, 23, 60, 30)), (36,List(84, 86, 57, 91, 98)), (51,List(68, 50, 44, 77, 1, 58, 58, 14, 75, 85, 10, 96, 58, 6, 36, 87, 81, 69)), (93,List(80, 71, 23, 77, 38, 25, 23, 89, 72, 30, 59, 44)), (33,List(28, 71, 60, 87, 17, 44, 41, 91, 7)), (42...
