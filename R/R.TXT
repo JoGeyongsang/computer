@@ -77,6 +77,146 @@ d=data.frame(word=names(v),freq=v)
 
 wordcloud(words=d$word,freq=d$freq,min.freq=5,max.words=200,random.order=FALSE,colors=brewer.pal(8,"Dark2"))
 
+scala> import org.apache.spark._
+import org.apache.spark._
+
+scala> import org.apache.spark.straming.)
+<console>:1: error: identifier expected but ')' found.
+import org.apache.spark.straming.)
+                                 ^
+
+scala> import org.apache.spark.straming._
+<console>:26: error: object straming is not a member of package org.apache.spark
+       import org.apache.spark.straming._
+                               ^
+
+scala> import org.apache.spark.streaming._
+import org.apache.spark.streaming._
+
+scala> val ssc=new StreamingContext(sc,Seconds(5))
+ssc: org.apache.spark.streaming.StreamingContext = org.apache.spark.streaming.StreamingContext@2086d469
+
+scala> val conf = new SparkConf().setMaster("local[4]").setAppName("App name")
+conf: org.apache.spark.SparkConf = org.apache.spark.SparkConf@101c15ad
+
+scala> val ssc= new StreamingContext9conf, seconds(5))
+<console>:1: error: ';' expected but ',' found.
+val ssc= new StreamingContext9conf, seconds(5))
+                                  ^
+
+scala> val ssc= new StreamingContext(conf, seconds(5))
+<console>:31: error: not found: value seconds
+       val ssc= new StreamingContext(conf, seconds(5))
+                                           ^
+
+scala> val ssc= new StreamingContext(conf,Seconds(5))
+org.apache.spark.SparkException: Only one SparkContext may be running in this JVM (see SPARK-2243). To ignore this error, set spark.driver.allowMultipleContexts = true. The currently running SparkContext was created at:
+org.apache.spark.sql.SparkSession$Builder.getOrCreate(SparkSession.scala:823)
+org.apache.spark.repl.Main$.createSparkSession(Main.scala:95)
+<init>(<console>:15)
+<init>(<console>:31)
+<init>(<console>:33)
+.<init>(<console>:37)
+.<clinit>(<console>)
+.$print$lzycompute(<console>:7)
+.$print(<console>:6)
+$print(<console>)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+scala.tools.nsc.interpreter.IMain$ReadEvalPrint.call(IMain.scala:786)
+scala.tools.nsc.interpreter.IMain$Request.loadAndRun(IMain.scala:1047)
+scala.tools.nsc.interpreter.IMain$WrappedRequest$$anonfun$loadAndRunReq$1.apply(IMain.scala:638)
+scala.tools.nsc.interpreter.IMain$WrappedRequest$$anonfun$loadAndRunReq$1.apply(IMain.scala:637)
+scala.reflect.internal.util.ScalaClassLoader$class.asContext(ScalaClassLoader.scala:31)
+scala.reflect.internal.util.AbstractFileClassLoader.asContext(AbstractFileClassLoader.scala:19)
+  at org.apache.spark.SparkContext$$anonfun$assertNoOtherContextIsRunning$2.apply(SparkContext.scala:2221)
+  at org.apache.spark.SparkContext$$anonfun$assertNoOtherContextIsRunning$2.apply(SparkContext.scala:2217)
+  at scala.Option.foreach(Option.scala:257)
+  at org.apache.spark.SparkContext$.assertNoOtherContextIsRunning(SparkContext.scala:2217)
+  at org.apache.spark.SparkContext$.markPartiallyConstructed(SparkContext.scala:2290)
+  at org.apache.spark.SparkContext.<init>(SparkContext.scala:89)
+  at org.apache.spark.streaming.StreamingContext$.createNewSparkContext(StreamingContext.scala:836)
+  at org.apache.spark.streaming.StreamingContext.<init>(StreamingContext.scala:84)
+  ... 52 elided
+
+scala>
+[3]+  Stopped                 spark-shell --master local[4]
+spark@spark-in-action:~$ CD FIRST-EDTION/CH06
+CD: command not found
+spark@spark-in-action:~$ cd first-edition/ch06
+spark@spark-in-action:~/first-edition/ch06$ tar xvfz orders.tar.gz
+orders.txt
+spark@spark-in-action:~/first-edition/ch06$ cd home
+-bash: cd: home: No such file or directory
+spark@spark-in-action:~/first-edition/ch06$ cd spark-in-action
+-bash: cd: spark-in-action: No such file or directory
+spark@spark-in-action:~/first-edition/ch06$ spark-shell
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel).
+Spark context Web UI available at http://10.0.2.15:4043
+Spark context available as 'sc' (master = local[*], app id = local-1644306430259).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 2.0.0
+      /_/
+
+Using Scala version 2.11.8 (OpenJDK 64-Bit Server VM, Java 1.8.0_72-internal)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala>
+[4]+  Stopped                 spark-shell
+spark@spark-in-action:~/first-edition/ch06$ cd
+spark@spark-in-action:~$ spark-shell
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel).
+Spark context Web UI available at http://10.0.2.15:4044
+Spark context available as 'sc' (master = local[*], app id = local-1644306516573).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 2.0.0
+      /_/
+
+Using Scala version 2.11.8 (OpenJDK 64-Bit Server VM, Java 1.8.0_72-internal)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> cat orders.txt | more
+<console>:1: error: ';' expected but '.' found.
+cat orders.txt | more
+          ^
+
+scala> val filestream=ssc.textFileStream("/home/spark/ch06input")
+<console>:23: error: not found: value ssc
+       val filestream=ssc.textFileStream("/home/spark/ch06input")
+                      ^
+
+scala> val filestream=sc.textFileStream("/home/spark/ch06input")
+<console>:24: error: value textFileStream is not a member of org.apache.spark.SparkContext
+       val filestream=sc.textFileStream("/home/spark/ch06input")
+                         ^
+
+scala> val filestream=ssc.textFileStream("/home/spark/ch06input")
+<console>:23: error: not found: value ssc
+       val filestream=ssc.textFileStream("/home/spark/ch06input")
+                      ^
+
+scala> val filestream = ssc.textFileStream("/home/spark/ch06input")
+<console>:23: error: not found: value ssc
+       val filestream = ssc.textFileStream("/home/spark/ch06input")
+                        ^
+
+scala>
+
+scala>
 
 
 
