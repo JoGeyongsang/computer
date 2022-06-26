@@ -13,3 +13,20 @@ print("'Hello'")
 
 # 6005
 print('"Hello World"')
+
+# 6006
+print("\"!@#$%^&*()'")
+
+# 6007
+print("\"C:\\Download\\'hello'.py\"")
+
+# 6008
+print("print(\"Hello\\nWorld\")")
+
+# 6009
+a=input()
+print(a)
+
+# 6010
+a=int(input())
+print(a)
