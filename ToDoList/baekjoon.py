@@ -56,3 +56,53 @@ i=0
 for b in range(1,a+1):
   i=i+b
 print(i)
+
+# 2741
+a=int(input())
+for i in range(1,a+1):
+  print(i)
+
+# 2742
+a=int(input())
+for i in range(a,0,-1):
+  print(i)
+
+# 11021
+n=int(input())
+for i in range(1,n+1):
+  a,b=map(int,input().split())
+  print("Case #"+str(i)+":",a+b)
+
+# 10871
+a,b=map(int,input().split())
+c=list(map(int,input().split()))
+for i in range(a):
+  if c[i]< b :
+    print(c[i],end=" ")
+
+# 10952
+while True:
+  a,b=map(int,input().split())
+  if a+b!=0:
+    print(a+b)
+    continue
+  else:
+    break
+
+# 10951
+while True:
+  try:
+    a,b=map(int,input().split())
+    print(a+b)
+  except:
+    break
+
+# 1110
+N = int(input())                             
+n = -1                                      
+t = 0                                        
+while n != N:                                
+	if n == -1: n = N                        
+	n = (n//10 + n%10)%10 + (n%10)*10        
+	t += 1                                   
+print(t)        

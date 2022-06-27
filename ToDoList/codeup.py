@@ -30,3 +30,30 @@ print(a)
 # 6010
 a=int(input())
 print(a)
+
+# 6011
+f=float(input())
+print(f)
+
+# 6012
+a=int(input())
+b=int(input())
+print(a)
+print(b)
+
+# 6013
+a=input()
+b=input()
+print(b)
+print(a)
+
+# 6014
+f=float(input())
+print(f)
+print(f)
+print(f)
+
+# 6015
+a,b=map(int,input().split())
+print(a)
+print(b)
