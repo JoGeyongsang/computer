@@ -57,3 +57,23 @@ print(f)
 a,b=map(int,input().split())
 print(a)
 print(b)
+
+# 6016
+a,b=input().split()
+print(b,a)
+
+# 6017
+a=input()
+print(a,a,a)
+
+# 6018
+a, b = input().split(':')
+print(a, b, sep=':')
+
+# 6019
+a,b,c=input().split('.')
+print(c,b,a,sep="-")
+
+# 6020
+a,b=input().split('-')
+print(a,b,sep='')
