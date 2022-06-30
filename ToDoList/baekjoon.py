@@ -106,3 +106,38 @@ while n != N:
 	n = (n//10 + n%10)%10 + (n%10)*10        
 	t += 1                                   
 print(t)        
+
+# 10818
+numArr = []
+a = int(input())
+b = list(map(int, input().split()))
+for i in range(a) :
+  numArr.append(b[i])
+numMax = max(numArr)
+numMin = min(numArr)
+print(numMin,numMax)
+
+# 2562
+a=[]
+
+for i in range(9):
+    a.append(int(input()))
+    
+print(max(a))
+print(a.index(max(a))+1)
+
+# 2577
+a=int(input())
+b=int(input())
+c=int(input())
+
+d=a*b*c
+
+numlist=list(str(d))
+numlist1=[0]*10
+for i in range(0,10):
+  for n in numlist:
+    if str(i)== n:
+      numlist1[i]+=1
+for k in numlist1:
+  print(k)

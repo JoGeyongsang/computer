@@ -85,3 +85,64 @@ print(a[1])
 print(a[2])
 print(a[3])
 print(a[4])
+
+# 6022
+a=input()
+print(a[0:2],a[2:4],a[4:6])
+
+#6023
+a,b,c=input().split(':')
+print(b)
+
+# 6024
+a,b=input().split()W
+print(a+b)
+
+# 6025
+a,b=map(int,input().split())
+print(a+b)
+
+# 6026
+a=float(input())
+b=float(input())
+print(a+b)
+
+# 6027
+a = input()
+n = int(a)          
+print('%x'% n)
+
+# 6028
+a = input()
+n = int(a)          
+print('%X'% n)
+
+# 6029
+a = input()
+n = int(a, 16)
+print('%o' % n)
+
+# 6030
+a = ord(input())
+print(a)
+
+# 6031
+a = int(input())
+print(chr(a)) 
+
+# 6032
+a=int(input())
+print(-a)
+
+# 6033
+a = input()
+b = ord(a)
+print(chr(b+1))
+
+# 6034
+a,b=map(int,input().split())
+print(a-b)
+
+# 6035
+a,b=map(float,input().split())
+print(a*b)
