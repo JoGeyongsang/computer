@@ -141,3 +141,22 @@ for i in range(0,10):
       numlist1[i]+=1
 for k in numlist1:
   print(k)
+
+# 3052
+arr = []
+for i in range(10):
+    n = int(input())
+    arr.append(n % 42)
+arr = set(arr)
+print(len(arr))
+
+# 1546
+a = int(input())
+num = list(map(int, input().split()))
+maxNum = max(num)
+
+for i in range(len(num)) :
+  num[i] = num[i]/maxNum*100
+
+avgNum = sum(num)/len(num)
+print(avgNum)
