@@ -167,3 +167,28 @@ print(a**b)
 # 6040
 a,b=map(int,input().split())
 print(a//b)
+
+# 6041
+a,b=map(int,input().split())
+print(a%b)
+
+# 6042
+a=float(input())
+print(format(a,".2f"))
+
+# 6043
+a,b=map(float,input().split())
+print(format(a/b,".3f"))
+
+# 6044
+a,b=map(int,input().split())
+print(a+b)
+print(a-b)
+print(a*b)
+print(a//b)
+print(a%b)
+print(format(a/b,".2f"))
+
+# 6045
+a,b,c=map(int,input().split())
+print(a+b+c,format((a+b+c)/3,".2f"))
