@@ -192,3 +192,24 @@ print(format(a/b,".2f"))
 # 6045
 a,b,c=map(int,input().split())
 print(a+b+c,format((a+b+c)/3,".2f"))
+
+# 6048
+a,b=map(int,input().split())
+if a<b:
+  print(True)
+else:
+  print(False)
+
+# 6049
+a,b=map(int,input().split())
+if a==b:
+  print(True)
+else:
+  print(False)
+
+# 6050
+a,b=map(int,input().split())
+if a<=b:
+  print(True)
+else:
+  print(False)
