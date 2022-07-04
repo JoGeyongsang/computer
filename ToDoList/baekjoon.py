@@ -160,3 +160,19 @@ for i in range(len(num)) :
 
 avgNum = sum(num)/len(num)
 print(avgNum)
+
+# 8958
+a=int(input())
+for i in range(a):
+  b=list(input())
+  c=0
+  d=0
+  for j in b:
+    if j=='O':
+      c+=1
+      d+=c
+    else:
+      c=0
+  print(d)
+
+# 4344
