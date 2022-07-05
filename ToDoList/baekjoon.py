@@ -98,14 +98,14 @@ while True:
     break
 
 # 1110
-N = int(input())                             
-n = -1                                      
-t = 0                                        
-while n != N:                                
-	if n == -1: n = N                        
-	n = (n//10 + n%10)%10 + (n%10)*10        
-	t += 1                                   
-print(t)        
+a = int(input())                             
+b = -1                                      
+c = 0                                        
+while b != a:                                
+	if b == -1: b = a                        
+	b = (b//10 + b%10)%10 + (b%10)*10        
+	c += 1                                   
+print(c)        
 
 # 10818
 numArr = []
@@ -176,3 +176,29 @@ for i in range(a):
   print(d)
 
 # 4344
+a=int(input())
+for i in range(a):
+  nlist=list(map(int,input().split(' ')))
+  n=nlist[0]
+  nsum=0
+  nave=0
+  for j in range(1,n+1):
+    nsum+=nlist[j]
+  nave=nsum/n
+  upave=0
+  for k in range(1,n+1):
+    if nlist[k] > nave:
+      upave+=1
+  print(f"{format((upave/n)*100,'.3f')}%")
+
+# 4673
+numbers=set(range(1,10001))
+remove=set()
+for i in numbers:
+  for j in str(i):
+    i+=int(j)
+  remove.add(i)
+
+self=numbers-remove
+for k in sorted(self):
+  print(k)

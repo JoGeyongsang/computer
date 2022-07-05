@@ -248,3 +248,35 @@ if (bool(a)==True) or (bool(b)==True):
   print(True)
 else:
   print(False)
+
+# 6056
+a,b=map(int,input().split())
+if (bool(a)) != (bool(b)):
+  print(True)
+else:
+  print(False)
+
+# 6057
+a,b=map(int,input().split())
+if (bool(a)) == (bool(b)):
+  print(True)
+else:
+  print(False)
+
+# 6058
+a,b=map(int,input().split())
+if (bool(a)==False) and (bool(b)==False):
+  print(True)
+else:
+  print(False)
+
+# 6063
+a,b=map(int,input().split())
+if a>b:
+  print(a)
+else:
+  print(b)
+
+# 6064
+a,b,c=map(int,input().split())
+print(min(a,b,c))
