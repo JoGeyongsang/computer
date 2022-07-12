@@ -270,6 +270,22 @@ if (bool(a)==False) and (bool(b)==False):
 else:
   print(False)
 
+# 6059
+a = int(input())
+print(~a)
+
+# 6060
+a, b = input().split()
+print(int(a)&int(b))
+
+# 6061
+a,b = input().split()
+print(int(a)|int(b))
+
+# 6062
+a,b = input().split()
+print(int(a)^int(b))
+
 # 6063
 a,b=map(int,input().split())
 if a>b:
@@ -280,3 +296,86 @@ else:
 # 6064
 a,b,c=map(int,input().split())
 print(min(a,b,c))
+
+# 6065
+a,b,c=map(int,input().split())
+if a%2==0:
+  print(a)
+if b%2==0:
+  print(b)
+if c%2==0:
+  print(c)
+
+# 6066
+a,b,c=map(int,input().split())
+if a%2==0:
+  print('even')
+else:
+  print('odd')
+if b%2==0:
+  print('even')
+else:
+  print('odd')
+if c%2==0:
+  print('even')
+else:
+  print('odd')
+
+# 6067
+a=int(input())
+if a<0:
+  if a%2==0:
+    print('A')
+  else:
+    print('B')
+else:
+  if a%2==0:
+    print('C')
+  else:
+    print('D')
+
+# 6068
+a=int(input())
+if a>=90:
+  print('A')
+elif a>=70:
+  print('B')
+elif a>=40:
+  print('C')
+else:
+  print('D')
+
+# 6069
+a=input()
+if a=='A':
+  print('best!!!')
+elif a=='B':
+  print('good!!')
+elif a=='C':
+  print('run!')
+elif a=='D':
+  print('slowly~')
+else:
+  print('what?')
+
+# 6070
+a=int(input())
+if (a>=3) and (a<=5):
+  print('spring')
+elif (a>=6) and (a<=8):
+  print('summer')
+elif (a>=9) and (a<=11):
+  print('fall')
+else:
+  print('winter')  
+
+# 6086
+a=int(input())
+b=0
+c=0
+while True:
+  b+=1
+  c=c+b
+  if c>=a:
+    break
+print(c)
